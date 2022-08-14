@@ -1,0 +1,294 @@
+Q1. Given an array of N integers. Your task is to print the sum of all of the integers.
+Solution: 
+function sumofArray(arr,n){
+  let sum = 0;
+  for(let i = 0; i < n; i++){
+    sum += arr[i];
+  }
+  return sum;
+}
+
+console.log(sumofArray([1,2,3,4],4));
+console.log(sumofArray([5,8,3,10,22,45],6));
+
+Q2. Given an array A[] of N integers and an index Key. Your task is to print the element present at
+index key in the array.
+Solution:
+function findKeyElement(arr,n,key){
+  for(let i = 0; i < n; i++) {
+    if(i === key) {
+      return arr[i];
+    }
+  }
+}
+
+console.log(findKeyElement([10,20,30,40,50],5,2));
+console.log(findKeyElement([10,20,30,40,50,60,70],7,4));
+
+Q3. Given an sorted array A of size N. Find number of elements which are less than or equal to given
+element X.
+Solution:
+function findElementsLess(arr,n,X){
+  let count = 0;
+  for(let i = 0; i < n; i++) {
+    if(X >= arr[i])
+      count++;
+  }
+  return count;
+}
+
+console.log(findElementsLess([1, 2, 4, 5, 8, 10],6,9));
+console.log(findElementsLess([1, 2, 2, 2, 5, 7, 9],7,2));
+
+Q4. You are given an array A of size N. You need to print elements of A in alternate order (starting
+from index 0).
+Solution:
+function findAlternateElements(arr,n){
+  let a = [];
+  for(let i = 0; i < n; i++) {
+    if(i%2 === 0)
+      a.push(arr[i]);
+  }
+  return a;
+}
+
+console.log(findAlternateElements([1, 2, 3, 4],4));
+console.log(findAlternateElements([1, 2, 3, 4, 5],5));
+
+Q5. Given an array Arr of N positive integers. Your task is to find the elements whose value is equal
+to that of its index value ( Consider 1-based indexing ).
+Solution: 
+function findIndexEqualElements(arr,n){
+  let a = [];
+  for(let i = 1; i <= n; i++) {
+    if(i === arr[i-1])
+      a.push(arr[i-1]);
+  }
+  return a;
+}
+
+console.log(findIndexEqualElements([15,2,45,12,7],5));
+console.log(findIndexEqualElements([1],1));
+
+Q6. Given an array of size N and you have to tell whether the array is perfect or not. An array is said
+to be perfect if it's reverse array matches the original array. If the array is perfect then print
+"PERFECT" else print "NOT PERFECT".
+Solution:
+function findPerfectOrNot(arr){
+  let a = [];
+  for(let i = 0; i < arr.length; i++) {
+      a.push(arr[arr.length-1-i]);
+  }
+  for(let i = 0; i < arr.length; i++) {
+    if(a[i] !== arr[i]) 
+      return "NOT PERFECT";
+  }
+  return "PERFECT";
+}
+
+console.log(findPerfectOrNot([1, 2, 3, 2, 1]));
+console.log(findPerfectOrNot([1, 2, 3, 4, 5]));
+
+Q7. Given an array of length N, at each step it is reduced by 1 element. In the first step the maximum
+element would be removed, while in the second step minimum element of the remaining array would
+be removed, in the third step again the maximum and so on. Continue this till the array contains only 1
+element. And find the final element remaining in the array.
+Solution:
+function findLeftElements(arr,n) {
+  while(n > 0) {
+    if(n === 1) {
+      return arr[0];
+    }
+    let max = findMaxNum(arr,n);
+    arr.splice(arr.indexOf(max),1);
+    n--;
+    if(n > 1) {
+      let min = findMinNum(arr,n);
+      arr.splice(arr.indexOf(min),1);
+      n--;
+    }
+  }
+};
+
+function findMaxNum(arr, n){
+  let max = arr[0];
+  for(let i = 1; i < n; i++) {
+    if(arr[i] > max)
+      max = arr[i]
+  }
+  return max;
+}
+
+function findMinNum(arr, n){
+  let min = arr[0];
+  for(let i = 1; i < n; i++) {
+    if(arr[i] < min)
+      min = arr[i]
+  }
+  return min;
+}
+
+console.log(findLeftElements([7,8,3,4,2,9,5],7));
+console.log(findLeftElements([8,1,2,9,4,3,7,5],8));
+console.log(findLeftElements([7, -2, 3, 4, 9, -1],6))
+
+Q8. Given an array of N distinct elements, the task is to find all elements in array except two greatest
+elements in sorted order.
+Solution:
+function findLeftElements(arr) {
+  let temp;
+  for(let i=0; i < arr.length; i++){
+    for(let j=i+1; j < arr.length; j++){
+      if(arr[i]>arr[j]) {
+        temp=arr[i];
+        arr[i]=arr[j];
+        arr[j]=temp;
+      }
+    }
+  }
+  arr.pop(arr[arr.length-1]);
+  arr.pop(arr[arr.length-1]);
+  return arr;
+}
+
+console.log(findLeftElements([2,8,7,1,5]));
+console.log(findLeftElements([7,-2,3,4,9,-1]));
+
+Q9. Write a program to find the sum of the given series 1+2+3+ . . . . . .(N terms)
+Solution:
+function findSumOfN(n){
+  let sum = 0;
+  for(let i = 1; i <=n; i++) {
+    sum += i;
+  }
+  return sum;
+}
+
+console.log(findSumOfN(1));
+console.log(findSumOfN(5));
+
+Q10. Given a number N. Your task is to check whether it is fascinating or not
+Solution:
+function findFascinatingOrNot(n){
+  let sum = 0, numberSum = 0;
+  for(let i = 1; i <=9; i++) {
+    sum += i;
+  }
+  let s = "" + n + n*2 + n*3;
+  for(let i = 0; i < s.length; i++) {
+    numberSum += +s[i];
+  }
+  if(sum === numberSum)
+    return "Fascinating";
+  else
+    return "Not Fascinating";
+}
+
+console.log(findFascinatingOrNot(192));
+console.log(findFascinatingOrNot(853));
+
+Bonus Question
+Given an array of even size N, task is to find minimum value that can be added to an element so that
+array become balanced. An array is balanced if the sum of the left half of the array elements is equal
+to the sum of right half.
+Solution:
+function findBalanceElement(arr,n){
+  let leftSum = 0;
+  let rightSum = 0;
+  for (let i = 1; i <= n/2; i++) {
+    rightSum += arr[i-1];
+  }
+  for (let j = n/2+1 ; j <= n; j++) {
+    leftSum += arr[j-1];
+  }
+  if(leftSum !== rightSum) {
+    if (leftSum > rightSum)
+      return leftSum - rightSum;
+    else 
+      return rightSum - leftSum;
+  }else
+    return 0;
+}
+
+console.log(findBalanceElement([1,5,3,2],4));
+console.log(findBalanceElement([1,2,1,2,1,3],6));
+
+Class Assignment:
+
+Star Pattern 1:
+let n = 5;
+let string = "";
+
+for(let i = 1; i <= n; i++){
+  for(let j = 1; j <= n-i; j++){
+    string += " ";
+  }
+  for(let k=1; k <= i; k++) {
+    string += "* ";
+  }
+  string += "\n";
+}
+
+console.log(string);
+
+Output:
+
+    * 
+   * * 
+  * * * 
+ * * * * 
+* * * * *
+
+let n = 5;
+let string = "";
+
+for(let i = 1; i <= n; i++){
+  for(let j = 1; j <= n-i; j++){
+    string += " ";
+  }
+  for(let k=1; k <= i; k++) {
+    string += "*";
+  }
+  string += "\n";
+}
+
+console.log(string);
+
+Output:
+
+    *
+   **
+  ***
+ ****
+*****
+
+let n = 5;
+let string = "";
+
+for(let i = 1; i <= n; i++){
+  for(let j = 1; j <= n-i; j++){
+    string += " ";
+  }
+  for(let k=1; k <= i; k++) {
+    string += k;
+  }
+  string += "\n";
+}
+
+console.log(string);
+
+Star Pattern 2:
+let n = 5;
+let string = "";
+
+for(let i = 1; i <= n; i++){
+  for(let j = 1; j <= n-i; j++){
+    string += " ";
+  }
+  for(let k=1; k <= i; k++) {
+    string += k;
+  }
+  string += "\n";
+}
+
+console.log(string);
