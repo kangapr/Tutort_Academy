@@ -1,0 +1,128 @@
+Leetcode Questions:
+1. https://leetcode.com/problems/richest-customer-wealth
+Solution:
+var maximumWealth = function(accounts) {
+    let sum = 0, max = 0;
+    for(let i = 0; i < accounts.length; i++) {
+        let b = accounts[i];
+        for(let j = 0; j < b.length; j++) {
+            sum += b[j];
+        }
+        if (sum > max)
+            max = sum;
+        sum = 0;
+    }
+    return max;
+};
+
+2. https://leetcode.com/problems/running-sum-of-1d-array/
+Solution: 
+var runningSum = function(nums) {
+    let b = [];
+    let sum = 0;
+    for(let i = 0; i < nums.length; i++) {
+        sum += nums[i];
+        b.push(sum);
+    }
+    return b;
+};
+
+3. https://leetcode.com/problems/jewels-and-stones
+Solution:
+var numJewelsInStones = function(jewels, stones) {
+    let a = jewels.split('');
+    let b = stones.split('');
+    let count = 0;
+    for(let i = 0; i < a.length; i++) {
+        for(let j =0; j < b.length; j++) {
+            if(a[i] === b[j])
+                count++;
+        }
+    }
+    return count;
+};
+
+4. https://leetcode.com/problems/minimum-absolute-difference
+Solution:
+var minimumAbsDifference = function(arr) {
+    let result = [], minDiff = Infinity;
+    arr.sort((a,b) => a-b);
+    for(let i = 0; i < arr.length; i++) {
+        let diff = arr[i+1] - arr[i];
+        if(diff < minDiff) {
+            minDiff = diff;
+            result = [];
+        }
+        if(diff === minDiff) 
+            result.push([arr[i],arr[i+1]]);
+    }
+    return result;
+};
+
+5. https://leetcode.com/problems/three-consecutive-odds
+Solution:
+var threeConsecutiveOdds = function(arr) {
+    let count = 0;
+    for(let i = 0; i < arr.length; ++i) {
+       if(arr[i]%2 !== 0)
+           count++;
+       else
+           count = 0;
+       if(count === 3)
+           return true;
+    }
+    return false;
+};
+
+6. https://leetcode.com/problems/transpose-matrix
+Solution:
+var transpose = function(matrix) {
+  let rows = matrix.length, cols = matrix[0].length, grid = [];
+  for(let i = 0; i < cols; i++) {
+      grid[i] = [rows];
+  }
+  for(let j = 0; j < rows; j++) {
+      for(let k = 0; k < cols; k++) {
+          grid[k][j] = matrix[j][k];
+      }
+  }
+  return grid;
+};
+
+7. https://leetcode.com/problems/majority-element
+Solution:
+var majorityElement = function(nums) {
+    let count = 1, element = nums[0];
+    for(let i = 0; i < nums.length; i++) {
+        if (element === nums[i])
+            count++;
+        else {
+            count--;
+            if(count === 0) {
+                count++;
+                element = nums[i];
+            }
+        }
+    }
+    return element;
+};
+
+8. https://leetcode.com/problems/move-zeroes
+Solution:
+var moveZeroes = function(nums) {
+    let a = [];
+    if(nums.length === 1) {
+        return nums;
+    }
+    for(let i = 0; i < nums.length; i++) {
+        while(nums[i] === 0){
+            a.push(nums[i]);
+            nums.splice(nums.indexOf(nums[i]),1);
+        }
+    }
+    if(a.length > 0) {
+        for(let i = 0; i < a.length; i++) {
+            nums.push(a[i]);
+        }
+    }
+};
